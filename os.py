@@ -54,50 +54,7 @@ v(no_reader)
 （b）若对面有车排队，则双方依次一辆一辆的通过。（具体意思就是甲方走一
 辆，乙方走一辆，再甲方走一辆……）
 
-flag = -1
-mutex = 1
 
-right_lock = 1
-left_lock = 1
-count_lock = 1
-
-no_right = 1
-no_left = 1
-
-left_count = 0
-right_count = 0
-
-p(right_lock)
-if ++ right_count == 1:
-    p(no_right)
-v(right_lock)
-
-p(mutex)
-
-if flag == 1:
-    v(mutex)
-    p(no_left)
-
-else:
-    flag = 1
-    v(mutex)
-    p(bridege)
-
-p(count_lock)
-++ count
-v(count_lock)
-v(no_left)
-上桥通行
-
-p(count_lock)
-if --count == 0:
-    v(bridge)
-v(count_lock)
-
-p(right_lock)
-if -- right_count == 0:
-    v(no_right)
-v(right_lock)
 
 
 
